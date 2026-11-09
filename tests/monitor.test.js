@@ -1,0 +1,12 @@
+const assert = require('assert');
+const M = require('../Model.js');
+assert.strictEqual(M.clampBrightness(NaN), 1);
+assert.strictEqual(M.clampBrightness(150), 100);
+assert.strictEqual(M.clampBrightness(-2), 1);
+assert.strictEqual(M.clampBrightness(42), 42);
+assert.deepStrictEqual(M.parseDisplays('invalid'), {displays: [], enabledDisplayCount: 0});
+assert.strictEqual(M.parseDisplays('[{"enabled":true},{"enabled":false}]').enabledDisplayCount, 1);
+assert.ok(M.availableScales(['1','1.25','1.6','2','3','4'],2880,1800).includes('4'));
+assert.strictEqual(M.matchingScaleIndex(['1','1.25','1.6','2','3','4'], '2',2880,1800), 3);
+assert.strictEqual(M.cleanScale('4',2880,1800), '4');
+console.log('native monitor model tests ok');

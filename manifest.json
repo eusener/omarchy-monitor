@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "eusener.displays",
+  "name": "Omarchy Monitor",
+  "version": "1.2.0",
+  "author": "eusener",
+  "license": "MIT",
+  "description": "Native brightness and text size with advanced per-monitor settings and automatic rollback.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "runtime/v_1_2_0_abbe228bb444/Monitor.qml"
+  },
+  "barWidget": {
+    "displayName": "Monitor",
+    "description": "Brightness, text size, resolution, scale, HDR, VRR and display arrangement.",
+    "category": "System",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.monitor"
+  }
+}

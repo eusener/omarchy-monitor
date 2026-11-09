@@ -1,0 +1,4 @@
+NativeMonitor.qml derives from the complete installed Omarchy monitor Panel.qml. Model.js is copied unchanged from its Model.js.
+Reference: /usr/share/omarchy/shell/plugins/panels/monitor/
+Upstream: https://github.com/basecamp/omarchy
+DisplayEditor.qml and the display helper originate from eusener.displays.
