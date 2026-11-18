@@ -10,7 +10,7 @@
     "bar-widget"
   ],
   "entryPoints": {
-    "barWidget": "runtime/v_1_2_0_abbe228bb444/Monitor.qml"
+    "barWidget": "runtime/v_1_2_0_48046a67f9c0/Monitor.qml"
   },
   "barWidget": {
     "displayName": "Monitor",

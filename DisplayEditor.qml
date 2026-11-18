@@ -559,7 +559,6 @@ Item {
                 readonly property bool customMode: mon.modes.indexOf(spec.mode + "Hz") < 0 && spec.mode !== "" && spec.mode !== "preferred"
                 readonly property bool isInternal: mon.kind === "internal"
                 readonly property bool active: !spec.disabled
-                readonly property var logical: L.logicalSize(spec, mon.width, mon.height)
 
                 PlainText {
                   width: parent.width
@@ -675,83 +674,6 @@ Item {
                           customField.focus = false
                         }
                       }
-                    }
-                  }
-
-                  // ---------- Scale ----------
-                  Column {
-                    width: parent.width
-                    spacing: Style.space(6)
-
-                    Item {
-                      width: parent.width
-                      implicitHeight: scaleTitle.implicitHeight
-                      PlainText {
-                        id: scaleTitle
-                        text: strings.t("scale")
-                      }
-                      PlainText {
-                        anchors.right: parent.right
-                        text: strings.t("logical").arg(details.logical.width).arg(details.logical.height)
-                        color: root.dim
-                        font.pixelSize: Style.font.caption
-                      }
-                    }
-
-                    Flow {
-                      width: parent.width
-                      spacing: Style.space(4)
-                      Repeater {
-                        model: L.validScales(details.size.width, details.size.height, 1, 3)
-                        Button {
-                          required property var modelData
-                          text: L.formatScale(modelData) + "×"
-                          bordered: true
-                          fontSize: Style.font.caption
-                          horizontalPadding: Style.spacing.sm
-                          active: Math.abs(details.spec.scale - modelData) < 0.001
-                          foreground: root.foreground
-                          fontFamily: root.fontFamily
-                          onClicked: root.setField(details.mon.name, "scale", modelData)
-                        }
-                      }
-                    }
-
-                    Row {
-                      spacing: Style.space(6)
-                      TextField {
-                        id: scaleField
-                        width: Style.space(90)
-                        placeholderText: "1.5"
-                        foreground: root.foreground
-                        font.family: root.fontFamily
-                        validator: DoubleValidator { bottom: 0.25; top: 4; decimals: 4; notation: DoubleValidator.StandardNotation; locale: "C" }
-                        onActiveFocusChanged: root.inputFocused = activeFocus
-                        onAccepted: scaleUse.clicked()
-                      }
-                      Button {
-                        id: scaleUse
-                        text: strings.t("use")
-                        bordered: true
-                        enabled: scaleField.acceptableInput
-                        foreground: root.foreground
-                        fontFamily: root.fontFamily
-                        onClicked: {
-                          var v = L.cleanScale(parseFloat(scaleField.text), details.size.width, details.size.height)
-                          root.setField(details.mon.name, "scale", v)
-                          scaleField.text = ""
-                          scaleField.focus = false
-                        }
-                      }
-                    }
-                    PlainText {
-                        width: parent.width
-                        wrapMode: Text.WordWrap
-                        text: scaleField.acceptableInput
-                          ? strings.t("roundsTo").arg(L.formatScale(L.cleanScale(parseFloat(scaleField.text), details.size.width, details.size.height)))
-                          : strings.t("freeScale")
-                        color: root.dim
-                        font.pixelSize: Style.font.caption
                     }
                   }
 
